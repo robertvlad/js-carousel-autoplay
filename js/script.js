@@ -1,3 +1,42 @@
+// 1 - SE l'immagine non è l'ultima da mostare:
+        // 1.1 - Togliere la classe active all'imagine attuale e metterla al successivo
+        // 1.2 - Togliere la classe active al pallino della bar di scorrimento, e metterla al successivo
+        // 1.3 - Incremento
+    // --- ALTRIMENTI non eseguo nessun cambiamento
+// DEFINZIONE FUNZIONE PER AUTOPLAY
+
+function autoplaySlide(){
+
+    if(itemActive < items.length - 1){
+
+        // Togliere la classe active all'imagine e del pallino attuale
+        items[itemActive].classList.remove("active");
+        circles[itemActive].classList.remove("active");
+        thumbnails[itemActive].classList.remove("active")
+
+        // Incremento
+        itemActive++;
+
+        // Aggiungere la classe active all'elemento successivo
+
+        items[itemActive].classList.add("active")
+        circles[itemActive].classList.add("active")
+        thumbnails[itemActive].classList.add("active")
+
+    }else{
+        items[itemActive].classList.remove("active");
+        circles[itemActive].classList.remove("active");
+        thumbnails[itemActive].classList.remove("active")
+
+        itemActive = 0;
+
+        items[itemActive].classList.add("active")
+        circles[itemActive].classList.add("active") 
+        thumbnails[itemActive].classList.add("active")
+    }
+
+}
+
 //Creo array immagini
 const imagesArray = [
     "01.webp",
@@ -47,42 +86,7 @@ thumbnails[itemActive].classList.add("active")
 const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
 
-next.addEventListener('click', function(){
-    
-    // 1 - SE l'immagine non è l'ultima da mostare:
-        // 1.1 - Togliere la classe active all'imagine attuale e metterla al successivo
-        // 1.2 - Togliere la classe active al pallino della bar di scorrimento, e metterla al successivo
-        // 1.3 - Incremento
-    // --- ALTRIMENTI non eseguo nessun cambiamento
-
-    if(itemActive < items.length - 1){
-
-        // Togliere la classe active all'imagine e del pallino attuale
-        items[itemActive].classList.remove("active");
-        circles[itemActive].classList.remove("active");
-        thumbnails[itemActive].classList.remove("active")
-
-        // Incremento
-        itemActive++;
-
-        // Aggiungere la classe active all'elemento successivo
-
-        items[itemActive].classList.add("active")
-        circles[itemActive].classList.add("active")
-        thumbnails[itemActive].classList.add("active")
-
-    }else{
-        items[itemActive].classList.remove("active");
-        circles[itemActive].classList.remove("active");
-        thumbnails[itemActive].classList.remove("active")
-
-        itemActive = 0;
-
-        items[itemActive].classList.add("active")
-        circles[itemActive].classList.add("active") 
-        thumbnails[itemActive].classList.add("active")
-    }
-});
+next.addEventListener('click', autoplaySlide)
 
 prev.addEventListener('click', function(){
     
@@ -121,4 +125,5 @@ prev.addEventListener('click', function(){
     }
 })
 
+setInterval(autoplaySlide,2000);
 
